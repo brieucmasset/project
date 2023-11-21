@@ -1,0 +1,39 @@
+{{ form_start(form) }}
+<div class="row mb-4">
+    <!-- Champ "Nom" de la salle de classe -->
+    <div class="col-6">
+        {{ form_label(form.name) }} {{ form_widget(form.name) }}
+    </div>
+    <!-- Champ "Capacité" de la salle de classe -->
+    <div class="col-6">
+        {{ form_label(form.capacity) }} {{ form_widget(form.capacity) }}
+    </div>
+    <!-- Section des enseignants -->
+    <div class="col-12 mt-3 mb-3 row">
+        <!-- Tableau pour stocker les IDs des enseignants liés à la salle de classe -->
+        {% set tab = [] %}
+        <!-- Vérification de l'existence de la variable classroom -->
+        {% if classroom is defined %}
+            <!-- Récupération des IDs des enseignants liés à la salle de classe depuis la table classroomTeachers -->
+            {% for row in classroom.classroomTeachers %}
+                <!-- Ajout des IDs des enseignants dans le tableau tab -->
+                {% set tab = tab|merge([row.teacher.id]) %}
+            {% endfor %}
+        {% endif %}
+        <!-- Label pour la section des enseignants -->
+        <label>Enseignants :</label><br>
+        <!-- Boucle pour afficher les enseignants -->
+        {% for row in teachers %}
+            <!-- Test si l'ID de l'enseignant est dans le tableau tab -->
+            {% set matchingItems = tab | filter(item => item == row.id) %}
+            <div class="col-3">
+                <!-- Si l'enseignant appartient à la salle de classe, ajoute l'attribut checked -->
+                <input {% if matchingItems | length > 0 %} checked {% endif %} type="checkbox" name="teachers[]" value="{{ row.id }}">&nbsp;{{ row.firstname }} {{ row.lastname }}
+            </div>
+        {% endfor %}
+    </div>
+    <!-- Champ de soumission du formulaire -->
+    <div class="col-md-6 mb-3">
+        {{ form_widget(form.submit) }}
+    </div>
+{{ form_end(form) }}

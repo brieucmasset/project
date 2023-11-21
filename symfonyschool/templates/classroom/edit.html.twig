@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Salle de cours - Modifier{% endblock %}
+
+{% block body %}
+    <h1 class="h1 mb-3 font-weight-normal">Modifier la salle</h1>
+
+    {{ include('classroom/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_classroom_index') }}" class="btn btn-danger col-md-6 mb-3">Annuler</a> 
+
+{% endblock %}

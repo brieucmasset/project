@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Étudiants - Modifier{% endblock %}
+
+{% block body %}
+    <div class="container mt-3">
+        <h1 class="h1 mb-3 font-weight-normal">Modifier un étudiant</h1>
+        
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+        
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                {{ form_label(form.firstname) }}
+                {{ form_widget(form.firstname) }}
+            </div>
+            <div class="col-md-6 mb-3">
+                {{ form_label(form.lastname) }}
+                {{ form_widget(form.lastname) }}
+            </div>
+            <div class="col-md-3 mb-3">
+                {{ form_label(form.age) }}
+                {{ form_widget(form.age) }}
+            </div>
+            <div class="col-md-3 mb-3">
+                {{ form_label(form.sexe) }}
+                {{ form_widget(form.sexe) }}
+            </div>
+            <div class="col-md-3 mb-3">
+                {{ form_label(form.classroom) }}
+                {{ form_widget(form.classroom) }}
+            </div>
+            <div class="col-md-3 mb-3">
+                {{ form_label(form.phone) }}
+                {{ form_widget(form.phone) }}
+            </div>
+            <div class="col-12 mb-3">
+                {{ form_label(form.address) }}
+                {{ form_widget(form.address) }}
+            </div>
+            <div class="col-md-6 mb-3">
+                {{ form_widget(form.submit) }}
+            </div>
+            <div class="col-md-6 mb-3">
+                <a href="{{ path('app_student') }}">
+                    {{ form_widget(form.annuler) }}
+                </a>
+            </div>
+        </div>
+        
+        {{ form_end(form, {render_rest:false}) }}
+    </div>
+{% endblock %}

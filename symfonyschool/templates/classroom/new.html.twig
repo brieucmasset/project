@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Salle de cours - Ajouter{% endblock %}
+
+{% block body %}
+    <h1 class="h1 mb-3 font-weight-normal">Ajouter une salle de cours</h1>
+
+    {{ include('classroom/_form.html.twig') }}
+
+    <a class="btn btn-danger col-md-6 mb-3" href="{{ path('app_classroom_index') }}">Annuler</a>
+{% endblock %}

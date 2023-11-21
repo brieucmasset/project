@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Salle de cours - Détails{% endblock %}
+
+{% block body %}
+    <div class="card flex-md-row mb-4 box-shadow h-md-250">
+        <div class="card-body d-flex flex-column align-items-start">
+            <h3 class="mb-3">
+                <a class="text-dark" href="#">{{ classroom.name }}</a>
+            </h3>
+            <div class="mb-2 text-muted">{{ classroom.capacity }} place(s) disponible(s)</div>
+            
+            <!-- Boucle sur classroom.teachers (ManyToMany relation) -->
+            <div class="col-12 row mb-3">
+                <label class="mb-2">Professeur(s) disponible(s) :</label><br />
+                {% for teacher in classroom.teachers %}
+                    <div class="col-4 mb-2">
+                        {{ teacher.firstname }} {{ teacher.lastname }}
+                    </div>
+                {% endfor %}
+            </div>
+
+            <!-- Boucle sur classroom.student -->
+            <div class="col-12 row mb-3">
+                <label class="mb-2">Etudiants(s) dans cette salle :</label><br />
+                {% for student in classroom.student %}
+                    <div class="col-4 mb-2">
+                        {{ student.firstname }} {{ student.lastname }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="mt-3">
+        <a class="btn btn-primary" href="{{ path('app_classroom_index') }}">Retour</a>
+    </div>
+{% endblock %}

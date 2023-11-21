@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}La Passerelle - Connexion{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form method="post" class="needs-validation">
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+
+                {% if app.user %}
+                    <div class="mb-3">
+                        Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
+                    </div>
+                {% endif %}
+
+                <h1 class="h3 mb-3 font-weight-normal">Veuillez vous connecter</h1>
+                <div class="mb-3">
+                    <label for="inputEmail">E-mail</label>
+                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+                </div>
+                <div class="mb-3">
+                    <label for="inputPassword">Mot de passe</label>
+                    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+                </div>
+
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                {#
+                    Décommentez cette section et ajoutez une option remember_me sous votre pare-feu pour activer la fonctionnalité de mémorisation.
+                    Voir https://symfony.com/doc/current/security/remember_me.html
+
+                    <div class="checkbox mb-3">
+                        <label>
+                            <input type="checkbox" name="_remember_me"> Se souvenir de moi
+                        </label>
+                    </div>
+                #}
+
+                <button class="btn btn-primary" type="submit">
+                    Se connecter
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

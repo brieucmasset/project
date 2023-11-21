@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Enseigants - Détails{% endblock %}
+
+{% block body %}
+    <div class="container mt-3">
+
+        <div class="card">
+            <div class="card-body">
+                <p class="card-text"><strong>Prénom:</strong> {{ teacher.firstname }}</p>
+                <p class="card-text"><strong>Nom:</strong> {{ teacher.lastname }}</p>
+                <p class="card-text"><strong>Sexe:</strong> {{ teacher.sexe }}</p>
+            </div>
+        </div>
+
+        <a href="{{ path('app_teacher_index') }}" class="btn btn-primary mt-3">Retour</a>
+    </div>
+{% endblock %}

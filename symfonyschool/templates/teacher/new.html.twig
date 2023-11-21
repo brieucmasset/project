@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Enseigants - Ajouter{% endblock %}
+
+{% block body %}
+    <div class="container mt-3">
+        <h1 class="h1 mb-3 font-weight-normal">Ajouter un enseignant</h1>
+        
+        {{ include('teacher/_form.html.twig', {'button_label': 'Sauvegarder'}) }}
+
+        <a href="{{ path('app_teacher_index') }}" class="btn btn-danger col-md-6 mb-3">Annuler</a>
+    </div>
+{% endblock %}

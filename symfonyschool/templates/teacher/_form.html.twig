@@ -1,0 +1,54 @@
+{{ form_start(form) }}
+    {{ form_widget(form._token) }}
+
+    <div class="row">
+        <!-- Champ "Prénom" -->
+        <div class="col-md-6 mb-3">
+            {{ form_label(form.firstname) }}
+            {{ form_widget(form.firstname) }}
+        </div>
+
+        <!-- Champ "Nom" -->
+        <div class="col-md-6 mb-3">
+            {{ form_label(form.lastname) }}
+            {{ form_widget(form.lastname) }}
+        </div>
+
+        <!-- Champ "Sexe" -->
+        <div class="col-md-6 mb-3">
+            {{ form_label(form.sexe) }}
+            {{ form_widget(form.sexe) }}
+        </div>
+
+        <!-- Section des enseignants -->
+        <div class="col-12 mt-3 mb-3">
+            <label>Enseignants :</label><br>
+
+            {% set tab = [] %}
+
+            <!-- Vérification de l'existence de la variable "teacher" -->
+            {% if teacher is defined %}
+                <!-- Boucle pour récupérer les IDs des salles de classe liées à l'enseignant -->
+                {% for row in teacher.classroomTeachers %}
+                    {% set tab = tab | merge([row.classroom.id]) %}
+                {% endfor %}
+            {% endif %}
+
+            <div class="row">
+                <!-- Boucle pour afficher les salles de classe -->
+                {% for row in classrooms %}
+                    {% set matchingItems = tab | filter(item => item == row.id) %}
+                    <!-- Case à cocher pour chaque salle de classe -->
+                    <div class="col-md-2 mb-3 mt-2">
+                        <input {% if matchingItems | length > 0 %} checked {% endif %} type="checkbox" name="classrooms[]" value="{{ row.id }}">&nbsp;{{ row.name }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Bouton de soumission du formulaire -->
+        <div class="col-md-6 mb-3">
+            <button type="submit" class="btn btn-success">{{ button_label|default('Sauvegarder') }}</button>
+        </div>
+    </div>
+{{ form_end(form, {render_rest: false}) }}

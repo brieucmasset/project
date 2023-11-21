@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Étudiants - Détails{% endblock %}
+
+{% block body %}
+    <div class="container mt-3">
+        <div class="card mb-4">
+            <div class="row g-0">
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h3 class="card-title">{{ student.firstname }} {{ student.lastname }}</h3>
+                        <div class="mb-2 text-muted">{{ student.age }} an(s)</div>
+                        <p class="card-text">Tel : {{ student.phone }} - Sexe : {{ student.sexe }}</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <img class="img-fluid" src="{{ asset('./assets/data_user/') }}{{ student.image }}">
+                </div>
+            </div>
+        </div>
+        <a href="{{ path('app_student') }}" class="btn btn-primary">Retour</a>
+    </div>
+{% endblock %}
